@@ -1,0 +1,30 @@
+{
+  "summary": "Iteration 2 — curriculum-aware academic intelligence layer + multilingual AI. Backend: 6/6 pytest in /app/backend/tests/test_academic_layer.py PASS (academic options catalog, GET/PUT /api/academic/profile, /auth/me reflection, newly-registered onboarded=false, real Malayalam<->English lesson round-trip via gpt-5.2 with Unicode 0D00-0D7F verification + model3d='heart', CBSE 5-question Photosynthesis exam). Frontend: All 5 Playwright flows PASS — (1) fresh register at /auth redirects to /onboarding, completed 4-step wizard (country->grade+exam->board->language+depth) and landed on /app/dashboard with badge 'Grade 10 · CBSE · English' + 'Your AI is now tailored to you!' toast, (2) demo@luminora.ai login goes straight to dashboard with badge 'Grade 10 · Kerala State Board · English', (3) ProfileBadge dropdown language switcher to Malayalam updates badge + toast, switched back to English, (4) edit-profile dropdown item navigates to /app/profile wizard in edit mode, (5) ProfileBadge visible on Studio/Tutor/Exam/Career headers. Demo profile reset to default English by pytest module teardown. No bugs found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_academic_layer.py",
+    "/app/backend/tests/test_luminora_backend.py",
+    "/app/test_reports/pytest/academic_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Onboarding.jsx step 1 reuses the same `onb-grade-*` testid prefix for both School-grade chips and Higher-education chips (Undergraduate/Postgraduate/Professional Certification). They remain unique because the option strings differ, but consider renaming higher-ed chips to `onb-higher-ed-*` for clarity and to avoid accidental collisions if a school grade is ever named like 'Undergraduate'.",
+    "academic.py PUT /profile blindly writes whatever language string the client sends — there is no validation against the LANGUAGES catalog. Same for grade/board/exam_target. Acceptable for trusted clients but a malicious user could store arbitrary strings that then poison the system prompt. Consider adding pydantic Literal[...] or in-handler validation.",
+    "academic_context() injects board/grade/language directly into the LLM system prompt — these are user-controlled. Risk of prompt-injection if a future UI allows freeform text. Currently mitigated by chip-only UI, but worth a note.",
+    "AcademicProfile.language default is 'English' but PUT handler uses `profile.language or 'English'`. Pydantic will already coerce None to 'English' via the default ONLY if the key is omitted; an explicit null still passes through and is handled — OK."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_academic_layer.py (new)"
+  ],
+  "success_rate": {
+    "backend": "100% (6/6 academic + previous 21/21 regression remain green)",
+    "frontend": "100% of academic-layer critical flows (register->onboarding wizard->dashboard, demo direct-to-dashboard, badge language switcher, edit-profile, badge across pages)"
+  },
+  "test_credentials": "demo@luminora.ai / Demo@123 (Grade 10 · Kerala State Board · English, onboarded) and admin@luminora.ai / Admin@123 (Grade 12 · CBSE · Advanced, onboarded). Fresh users register via /auth and start with onboarded=false.",
+  "seed_data_creation": "Academic test module mutates the demo account's profile to verify language adaptation and CBSE exam generation, then resets it back to {Grade 10, Kerala State Board, India, English, None, Standard} via a module-scoped autouse teardown fixture. The Playwright Malayalam switch also flips back to English at the end of the run so subsequent testers see English by default. One brand-new user (playwright_<timestamp>@example.com / Playwright@123) is created in the DB by the frontend test and now exists onboarded=true on the CBSE/Grade 10 path; no cleanup needed (test_ prefix not used but it does not interfere with anything).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Two pytest files now exist: /app/backend/tests/test_luminora_backend.py (21 tests, full app regression) and /app/backend/tests/test_academic_layer.py (6 tests, curriculum/multilingual layer). Both require REACT_APP_BACKEND_URL in env (export from frontend/.env or pass on CLI). LLM_TIMEOUT is 120s on academic suite because the Malayalam round-trip can take 30s+. Onboarding wizard uses testids onb-country-*, onb-grade-*, onb-exam-*, onb-board-*, onb-language-*, onb-level-*, onb-next, onb-finish. ProfileBadge testids: profile-badge, lang-<Language>, edit-profile. /auth register form has no name attribute on the name input — use the first text-type input or query-by-placeholder 'Aarav Sharma'.",
+  "rca of the issue": "No bugs to RCA. Note: a transient test failure occurred initially when the Playwright register flow could not locate the name input via name attribute; fixed in the test by selecting the first type=text input, not a code bug."
+}

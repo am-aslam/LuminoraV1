@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background: 224 71% 4%;
+    --foreground: 0 0% 98%;
+    --card: 222 47% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 222 47% 6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 262 83% 58%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 222 30% 14%;
+    --muted-foreground: 220 13% 65%;
+    --accent: 188 95% 43%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 30% 16%;
+    --input: 222 30% 14%;
+    --ring: 221 83% 53%;
+    --radius: 0.85rem;
+}
+
+* {
+    border-color: hsl(var(--border));
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: #030712;
+    color: #ffffff;
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+    font-family: "Outfit", sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.font-mono {
+    font-family: "JetBrains Mono", monospace;
+}
+
+/* ---------- Glassmorphism ---------- */
+.glass {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-strong {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.glass-hover {
+    transition:
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+.glass-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow:
+        0 12px 40px rgba(37, 99, 235, 0.18),
+        0 0 0 1px rgba(124, 58, 237, 0.15);
+}
+
+/* ---------- Aurora / glow ---------- */
+.aurora-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    opacity: 0.55;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.text-gradient {
+    background: linear-gradient(120deg, #ffffff 0%, #93c5fd 45%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-brand {
+    background: linear-gradient(120deg, #2563eb, #7c3aed 60%, #06b6d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.glow-border {
+    position: relative;
+}
+.glow-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(130deg, #2563eb, #7c3aed, #06b6d4);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* ---------- Grid texture ---------- */
+.grid-texture {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 56px 56px;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(124, 58, 237, 0.35);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(124, 58, 237, 0.6);
+    background-clip: content-box;
+}
+
+::selection {
+    background: rgba(37, 99, 235, 0.4);
+    color: #fff;
+}
+
+/* ---------- Orb pulse ---------- */
+@keyframes orb-pulse {
+    0%,
+    100% {
+        box-shadow:
+            0 0 40px 6px rgba(37, 99, 235, 0.55),
+            0 0 90px 18px rgba(124, 58, 237, 0.35);
+    }
+    50% {
+        box-shadow:
+            0 0 60px 12px rgba(124, 58, 237, 0.65),
+            0 0 120px 30px rgba(6, 182, 212, 0.35);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.04) 25%,
+        rgba(255, 255, 255, 0.1) 37%,
+        rgba(255, 255, 255, 0.04) 63%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease infinite;
+}
+
+@layer base {
+    body {
+        @apply bg-background text-foreground;
+    }
+}

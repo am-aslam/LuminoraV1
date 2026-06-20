@@ -1,0 +1,134 @@
+{
+  "project_name": "Luminora Learning",
+  "theme": "dark",
+  "archetype": "Archetype 5: Luxury (Premium, Depth, Mystery) mixed with Archetype 4 (High-Contrast Tech)",
+  "design_philosophy": "Intelligent, Magical, Futuristic, Premium, Personalized, Motivating. 'An AI understands me and is helping me succeed.'",
+  "typography": {
+    "fonts": {
+      "headings": "Outfit",
+      "body": "Manrope",
+      "mono": "JetBrains Mono"
+    },
+    "rules": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-light to font-bold mix",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight",
+      "h3": "text-xl sm:text-2xl tracking-tight",
+      "body": "text-base leading-relaxed text-gray-300",
+      "labels": "uppercase text-xs tracking-[0.2em] text-gray-400"
+    }
+  },
+  "colors": {
+    "background": "#030712",
+    "surface": "#0A0F1C",
+    "primary": "#2563EB",
+    "secondary": "#7C3AED",
+    "accent": "#06B6D4",
+    "success": "#10B981",
+    "warning": "#F59E0B",
+    "error": "#EF4444",
+    "glass": {
+      "background": "rgba(255, 255, 255, 0.04)",
+      "border": "rgba(255, 255, 255, 0.08)",
+      "highlight": "rgba(255, 255, 255, 0.12)"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "#9CA3AF",
+      "muted": "#6B7280"
+    }
+  },
+  "effects": {
+    "glassmorphism": {
+      "class": "backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
+      "usage": "Use for floating navs, dashboard cards, modal overlays, AI Tutor sidebar."
+    },
+    "aurora_gradients": {
+      "class": "bg-gradient-to-tr from-blue-600/20 via-purple-600/20 to-cyan-600/20 blur-3xl",
+      "usage": "Use as ambient background glows behind key sections and the AI Orb."
+    },
+    "glow_borders": {
+      "class": "border border-transparent bg-clip-border [background-image:linear-gradient(#0A0F1C,#0A0F1C),linear-gradient(to_right,#2563EB,#7C3AED)]",
+      "usage": "Use for premium feature highlights and active AI states."
+    }
+  },
+  "layout_and_spacing": {
+    "marketing_pages": {
+      "grid": "Tetris Grid (grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8 to gap-12)",
+      "spacing": "Generous (p-12, py-24, py-32)",
+      "alignment": "Asymmetrical, overlapping elements."
+    },
+    "dashboard_pages": {
+      "grid": "Control Room Grid (grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6)",
+      "spacing": "Dense but breathable (p-6, p-8 inside cards)",
+      "alignment": "Strict grid hierarchy, utilize h-full on children."
+    }
+  },
+  "motion_and_interaction": {
+    "libraries": ["framer-motion"],
+    "rules": {
+      "hover": "Slight lift (-translate-y-1), increased border opacity, subtle inner glow.",
+      "page_transition": "Fade in with slight upward motion (y: 20 to 0).",
+      "ai_orb": "Continuous slow floating (y: -10 to 10), pulsing glow opacity, dynamic gradient rotation.",
+      "charts": "Animated drawing of lines/bars using Recharts with staggered entrance."
+    }
+  },
+  "three_js_3d_experience": {
+    "libraries": ["three", "@react-three/fiber", "@react-three/drei"],
+    "implementation_rules": [
+      "Use <Environment> for cinematic lighting.",
+      "Use <Float> for idle animations of 3D models (Heart, Brain, Solar System).",
+      "Use transparent canvas backgrounds to blend seamlessly with the glassmorphism UI.",
+      "Ensure models are lazy-loaded via <Suspense>."
+    ]
+  },
+  "components": {
+    "buttons": "Premium solid or glass. Primary CTA uses vibrant #2563EB with subtle drop shadow. Hover state brightens color.",
+    "cards": "Cardless or Glassmorphism cards with max 12px border-radius.",
+    "navigation": "Sticky glass header (z-50) with subtle bottom border. Mobile bottom nav for app view.",
+    "testing": "All interactive elements MUST include data-testid attribute (e.g., data-testid='start-trial-button')."
+  },
+  "media": {
+    "icons": {
+      "library": "@phosphor-icons/react",
+      "style": "Duotone or bold depending on emphasis. White or accent color."
+    },
+    "images": [
+      {
+        "url": "https://images.pexels.com/photos/33441873/pexels-photo-33441873.jpeg",
+        "category": "background",
+        "description": "Cosmic deep space abstract swirl, use for hero section background with heavy dark overlay."
+      },
+      {
+        "url": "https://images.pexels.com/photos/30018097/pexels-photo-30018097.jpeg",
+        "category": "abstract",
+        "description": "Abstract flowing purple shapes on dark background for AI Tutor or Learning Studio background."
+      },
+      {
+        "url": "https://images.pexels.com/photos/15856134/pexels-photo-15856134.jpeg",
+        "category": "lifestyle",
+        "description": "Modern futuristic library, use for About or Vision section with low opacity."
+      },
+      {
+        "url": "https://images.pexels.com/photos/10142683/pexels-photo-10142683.jpeg",
+        "category": "logo",
+        "description": "Microsoft logo in modern setting, can be used in trusted by/sponsor section."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1760386129108-d17b9cdfc4fa",
+        "category": "logo",
+        "description": "Audible logo illuminated, can be used in trusted by/sponsor section."
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Initialize React app with Tailwind CSS and install framer-motion, @phosphor-icons/react, recharts, @react-three/fiber, @react-three/drei.",
+    "Implement Outfit font for headings and Manrope for body text via Google Fonts.",
+    "Build the Landing Page with the cosmic background, floating AI Orb (can be a glowing CSS/Framer motion sphere or a simple 3D sphere), and a 'Tetris Grid' for features.",
+    "Build the Student Dashboard with the 'Control Room' bento grid, glassmorphic cards, and Recharts for analytics.",
+    "Build the AI Learning Studio featuring a 3D model placeholder (using react-three-fiber for a basic shape if complex models aren't available) and an AI chat sidebar.",
+    "Build the Pricing page with premium glassmorphism tiers.",
+    "Ensure the entire app uses #030712 as the root background, with layered aurora gradients.",
+    "Do NOT use raw HTML <select> or <input type='date'>; customize Shadcn UI or build custom accessible glass inputs.",
+    "CRITICAL: Add data-testid to all buttons, links, and forms."
+  ]
+}
